@@ -35,4 +35,4 @@ Route::get('/', function () {
 
 
 Route::get('/artigos', 'ArtigosController@index');
-Route::get('/artigos/laravel', 'ArtigosController@laravel');
+Route::get('/artigos/{id}', 'ArtigosController@show');
