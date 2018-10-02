@@ -13,7 +13,8 @@
         <article>
             <h3>
                 <a href="{{ url('/artigos/' . $artigo->id) }}">
-                {{ $artigo->titulo }}</a>
+                    {{ $artigo->titulo }}
+                </a>
             </h3>
             <p>{{ $artigo->corpo }}</p>
         </article>
