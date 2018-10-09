@@ -10,4 +10,8 @@ class Comentario extends Model {
         return $this->belongsTo(Artigo::class);
     }
 
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
 }

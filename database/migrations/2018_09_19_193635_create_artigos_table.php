@@ -18,6 +18,11 @@ class CreateArtigosTable extends Migration
             $table->string('titulo');
             $table->text('corpo');
             $table->timestamps();
+
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')
+                  ->references('id')
+                  ->on('users');
         });
     }
 
