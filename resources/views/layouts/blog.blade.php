@@ -8,14 +8,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title>Nosso Blog</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/blog/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/blog/css/blog.css" rel="stylesheet">
-
+    {{ Html::style('blog/css/bootstrap.min.css') }}
+    {{ Html::style('blog/css/blog.css') }}
   </head>
 
   <body>
@@ -23,14 +19,18 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        {{ link_to_route(
+                'home',
+                'Nosso Blog',
+                [],
+                ['class' => 'navbar-brand']) }}
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home
+              <a class="nav-link" href="{{ url(route('home')) }}">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -42,6 +42,13 @@
                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                 </li>
             @else
+                <li class="nav-item">
+                    {{ link_to_route(
+                                    'artigos.create',
+                                    'Publicar Artigo',
+                                    [],
+                                    ['class' => 'nav-link']) }}
+                </li>
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }} <span class="caret"></span>
@@ -152,9 +159,8 @@
       <!-- /.container -->
     </footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="/blog/js/jquery.min.js"></script>
-    <script src="/blog/js/bootstrap.bundle.min.js"></script>
+    {{ Html::script('blog/js/jquery.min.js') }}
+    {{ Html::script('blog/js/bootstrap.bundle.min.js') }}
 
   </body>
 

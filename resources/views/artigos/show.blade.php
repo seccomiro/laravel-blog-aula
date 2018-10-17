@@ -6,7 +6,21 @@
 
 @section('conteudo')
   <!-- Title -->
-  <h1 class="mt-4">{{ $artigo->titulo }}</h1>
+  <h1 class="mt-4">
+    {{ $artigo->titulo }}
+    @if ($artigo->user == Auth::user())
+      {{ link_to_route(
+          'artigos.edit',
+          'Editar',
+          [$artigo->id],
+          ['class' => 'btn btn-info btn-sm']) }}
+      {!! Form::open(['route' => 
+            ['artigos.destroy', $artigo->id],
+              'method' => 'DELETE', 'class' => 'd-inline']) !!}
+        {!! Form::submit('Excluir', ['class' => 'btn btn-danger btn-sm']) !!}
+      {!! Form::close() !!}
+    @endif
+  </h1>
 
   <!-- Author -->
   <p class="lead">

@@ -9,9 +9,27 @@
     <!-- Blog Post -->
     <div class="card mb-4">
       <div class="card-body">
-        <h2 class="card-title">{{ $artigo->titulo }}</h2>
+        <h2 class="card-title">
+          {{ $artigo->titulo }}
+          @if ($artigo->user == Auth::user())
+            {{ link_to_route(
+                'artigos.edit',
+                'Editar',
+                [$artigo->id],
+                ['class' => 'btn btn-info btn-sm']) }}
+            {!! Form::open(['route' => 
+                  ['artigos.destroy', $artigo->id],
+                    'method' => 'DELETE', 'class' => 'd-inline']) !!}
+              {!! Form::submit('Excluir', ['class' => 'btn btn-danger btn-sm']) !!}
+            {!! Form::close() !!}
+          @endif
+        </h2>
         <p class="card-text">{{ $artigo->corpo }}</p>
-        <a href="{{ url('/artigos/' . $artigo->id) }}" class="btn btn-primary">Leia Mais &rarr;</a>
+        {{ link_to_route(
+              'artigos.show',
+              'Leia Mais &rarr;',
+              [$artigo->id],
+              ['class' => 'btn btn-primary']) }}
       </div>
       <div class="card-footer text-muted">
         Publicado em {{ $artigo->created_at }} por

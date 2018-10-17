@@ -15,8 +15,7 @@ class ArtigosController extends Controller {
         return view('artigos.index', compact('artigos', 'teste'));
     }
         
-    function show($id) {
-        $artigo = Artigo::find($id);
+    function show(Artigo $artigo) {
         return view('artigos.show', compact('artigo'));
     }
 
@@ -35,7 +34,31 @@ class ArtigosController extends Controller {
 
         // Artigo::create($request->all());
 
-        return redirect('/artigos');
+        // return redirect('/artigos');
+        return redirect(route('artigos.index'));
+    }
+
+    function edit(Artigo $artigo) {
+        return view('artigos.edit', compact('artigo'));
+    }
+
+    function update(Request $request, Artigo $artigo) {
+        if ($artigo->user == Auth::user()) {
+            $artigo->fill($request->all());
+            $artigo->save();
+
+            return redirect(route('artigos.show', $artigo->id));
+        } else
+            abort(403);
+    }
+
+    function destroy(Request $request, Artigo $artigo) {
+        if ($artigo->user == Auth::user()) {
+            $artigo->delete();
+
+            return redirect(route('artigos.index'));
+        } else
+            abort(403);
     }
 
     function storeComentario(Request $request, Artigo $artigo) {
