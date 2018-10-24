@@ -46,15 +46,12 @@
   <div class="card my-4">
     <h5 class="card-header">Deixe seu Comentário:</h5>
     <div class="card-body">
-      <form
-        action="{{ url("/artigos/$artigo->id/comentar") }}"
-        method="post">
-        {{ csrf_field() }}
+      {!! Form::open(['route' => ['comentarios.store', $artigo->id]]) !!}
         <div class="form-group">
-          <textarea name="corpo" class="form-control" rows="3"></textarea>
+          {!! Form::textarea('corpo', '', ['class' => 'form-control', 'rows' => '3']) !!}
         </div>
-        <button type="submit" class="btn btn-primary">Comentar</button>
-      </form>
+        {!! Form::submit('Comentar', ['class' => 'btn btn-primary']) !!}
+      {!! Form::close() !!}
     </div>
   </div>
 
@@ -66,7 +63,22 @@
         <h5 class="mt-0">{{ $comentario->user->name }}
           {{ $comentario->created_at->diffForHumans() }}
         </h5>
-        {{ $comentario->corpo }}
+        <div class="comentario">
+          <div class="original">
+            <span class="texto-corpo">{{ $comentario->corpo }}</span>
+            @if ($comentario->user == Auth::user())
+              <button class="btn btn-light btn-sm btn-editar-comentario">Editar</button>
+            @endif
+          </div>
+          <div class="editar">
+            {!! Form::open(['route' => ['comentarios.update', $artigo->id, $comentario->id], 'method' => 'PUT', 'class' => 'form-editar-comentario']) !!}
+              <div class="form-group">
+                {!! Form::textarea('corpo', $comentario->corpo, ['class' => 'form-control', 'rows' => '3']) !!}
+              </div>
+              {!! Form::submit('Atualizar Comentário', ['class' => 'btn btn-primary']) !!}
+            {!! Form::close() !!}
+          </div>
+        </div>
       </div>
     </div>
   @endforeach

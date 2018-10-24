@@ -20,10 +20,10 @@ Route::delete('/artigos/{artigo}', 'ArtigosController@destroy')
     ->middleware('auth')
     ->name('artigos.destroy');
 
-Route::post('/artigos/{artigo}/comentar', 
-    'ArtigosController@storeComentario')
+Route::post('/artigos/{artigo}/comentarios', 
+    'ComentariosController@store')
     ->middleware('auth')
-    ->name('comentarios.create');
+    ->name('comentarios.store');
 
 Auth::routes();
 Route::get('/', 'ArtigosController@index')

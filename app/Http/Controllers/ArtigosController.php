@@ -61,14 +61,4 @@ class ArtigosController extends Controller {
             abort(403);
     }
 
-    function storeComentario(Request $request, Artigo $artigo) {
-        $comentario = new Comentario;
-        $comentario->fill($request->all());
-        $comentario->user()->associate(Auth::user());
-        $comentario->artigo()->associate($artigo);
-        $comentario->save();
-
-        return redirect(url("/artigos/$artigo->id"));
-    }
-
 }

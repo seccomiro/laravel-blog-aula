@@ -161,6 +161,7 @@
 
     {{ Html::script('blog/js/jquery.min.js') }}
     {{ Html::script('blog/js/bootstrap.bundle.min.js') }}
+    {{ Html::script('blog/js/blog.js') }}
 
   </body>
 
